@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from pyswip import Prolog
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 prolog = Prolog()
 prolog.consult("personalities.pl")  
@@ -34,6 +36,8 @@ class MBTITestApp:
     def __init__(self, root):
         self.root = root
         self.root.title("MBTI Test")
+        self.root.geometry("600x250")
+        self.root.configure(bg="#f0f0f0")  
         self.questions = []
         self.current_question = 0
         self.scores = {'EI': 0, 'SN': 0, 'TF': 0, 'JP': 0}
@@ -51,12 +55,12 @@ class MBTITestApp:
     def create_widgets(self):
         # Crear widgets
         self.question_label = tk.Label(self.root, text="", wraplength=400, font=("Arial", 14))
-        self.question_label.pack(pady=20)
+        self.question_label.pack(pady=20, padx=20)
 
-        self.option1_button = tk.Button(self.root, text="", command=lambda: self.answer(1))
+        self.option1_button = tk.Button(self.root, text="", bg="blue", fg="white", command=lambda: self.answer(1))
         self.option1_button.pack(pady=10, fill=tk.X, padx=50)
 
-        self.option2_button = tk.Button(self.root, text="", command=lambda: self.answer(2))
+        self.option2_button = tk.Button(self.root, text="", bg="red", fg="white", command=lambda: self.answer(2))
         self.option2_button.pack(pady=10, fill=tk.X, padx=50)
 
         self.update_question()
@@ -65,7 +69,7 @@ class MBTITestApp:
         # Actualizar la pregunta actual
         if self.current_question < len(self.questions):
             question = self.questions[self.current_question]
-            self.question_label.config(text=question['Text'])
+            self.question_label.config(text=f"{question['ID']}. {question['Text']}")
             self.option1_button.config(text="De acuerdo")
             self.option2_button.config(text="En desacuerdo")
         else:
