@@ -7,7 +7,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 prolog = Prolog()
 prolog.consult("personalities.pl")  
 
-# Función para determinar personalidad
+# Funcion para determinar personalidad
 def determine_personality(scores):
     query = (
         f"determine_mbti({scores['EI']}, {scores['SN']}, {scores['TF']}, {scores['JP']}, Personality)."
@@ -31,7 +31,7 @@ def get_affinities(personality):
 
     return compatible, incompatible
 
-# Interfaz gráfica
+# Interfaz grafica
 class MBTITestApp:
     def __init__(self, root):
         self.root = root
@@ -69,7 +69,7 @@ class MBTITestApp:
         # Actualizar la pregunta actual
         if self.current_question < len(self.questions):
             question = self.questions[self.current_question]
-            self.question_label.config(text=f"{question['ID']}. {question['Text']}")
+            self.question_label.config(text=question['Text'])
             self.option1_button.config(text="De acuerdo")
             self.option2_button.config(text="En desacuerdo")
         else:
@@ -100,7 +100,7 @@ class MBTITestApp:
         )
         self.root.quit()
 
-# Iniciar la aplicación
+# Iniciar la aplicacion
 if __name__ == "__main__":
     root = tk.Tk()
     app = MBTITestApp(root)
